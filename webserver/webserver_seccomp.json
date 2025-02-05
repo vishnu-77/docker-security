@@ -1,0 +1,28 @@
+{
+  "defaultAction": "SCMP_ACT_ALLOW",
+  "architectures": [
+    "SCMP_ARCH_X86_64"
+  ],
+  "syscalls": [
+    {
+      "names": ["read", "write", "open", "close"],
+      "action": "SCMP_ACT_ALLOW",
+      "args": []
+    },
+    {
+      "names": ["socket", "bind", "connect", "listen", "accept"],
+      "action": "SCMP_ACT_ALLOW",
+      "args": []
+    },
+    {
+      "names": ["getuid", "getgid", "geteuid", "getegid", "setuid", "setgid", "seteuid", "setegid"],
+      "action": "SCMP_ACT_ALLOW",
+      "args": []
+    },
+    {
+      "names": ["futex", "clone", "exit", "exit_group", "wait4"],
+      "action": "SCMP_ACT_ALLOW",
+      "args": []
+    }
+  ]
+}

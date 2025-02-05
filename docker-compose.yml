@@ -1,0 +1,96 @@
+version: '3.8'
+ 
+services:
+  webserver:
+    image: u5569451/csvs_webserver_i
+    container_name: u5569451_csvs_webserver_c
+    hostname: web.cyber.test
+    networks:
+      u5569451_csvs_dbserver_net:
+        ipv4_address: 203.0.113.200
+    build:
+      context: ./webserver
+    security_opt:
+      - no-new-privileges:true
+      - seccomp:./webserver/webserver_seccomp.json
+      - label:container_port_t
+      - label:container_runtime_t
+    ports:
+      - "8080:80"
+    deploy:
+      mode: global  # changed to global but by default mode is replicated
+      resources:
+        limits:
+          memory: 50M
+        reservations:
+          memory: 20M
+      restart_policy:
+        condition: on-failure
+    healthcheck:
+      test: ["CMD-SHELL", "curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:8080/"]
+      interval: 2m30s
+      timeout: 10s
+      retries: 2
+      start_period: 2m
+    cap_drop:
+      - SYS_PTRACE
+      - SYS_RAWIO
+      - NET_RAW
+      - SYS_MODULE
+    depends_on:
+      - db.cyber23.test
+      
+  db.cyber23.test:
+    image: u5569451/csvs_dbserver_i
+    container_name: u5569451_csvs_dbserver_c
+    hostname: db.cyber23.test
+    networks:
+      u5569451_csvs_dbserver_net:
+        ipv4_address: 203.0.113.201
+    hostname: db.cyber23.test
+    build:
+      context: ./dbserver
+    env_file:
+      - ./dbserver/secrets/db.env
+    security_opt:
+      - no-new-privileges:true
+      - seccomp:./dbserver/dbserver_seccomp.json
+      - label:container_port_t
+      - label:container_runtime_t
+    ports:
+      - "3306:3306"
+    deploy:
+      mode: global  # changed to global but by default mode is replicated
+      resources:
+        limits:
+          memory: 100M
+        reservations:
+          memory: 20M
+      restart_policy:
+        condition: on-failure
+    volumes:
+      - ./dbserver/sqlconfig/csvs23db.sql:/docker-entrypoint-initdb.d/csvs23db.sql
+      - mariadb_data:/var/lib/mysql  # Adding a volume for data persistence in mariadb data      
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uwwwclient23 -pmariapwd"]
+      interval: 2m30s
+      timeout: 10s
+      retries: 2
+      start_period: 2m
+    cap_drop:
+      - SYS_PTRACE
+      - NET_RAW
+      - SYS_ADMIN
+      - DAC_READ_SEARCH
+      - AUDIT_WRITE
+      
+
+volumes:
+  mariadb_data:
+networks:
+  u5569451_csvs_dbserver_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 203.0.113.0/24

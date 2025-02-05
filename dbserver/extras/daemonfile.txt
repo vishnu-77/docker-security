@@ -1,0 +1,58 @@
+[
+  {
+    "log-driver": "json-file",
+    "log-opts": {
+      "max-size": "10m",
+      "max-file": "3"
+    }
+  },
+  {
+    "default-address-pools": [
+      {"base": "127.0.0.0/16", "size": 24}
+    ],
+    "dns": ["8.8.8.8", "8.8.4.4"]
+  },
+  {
+    "storage-driver": "overlay2",
+    "storage-opts": [
+      "overlay2.override_kernel_check=true"
+    ]
+  },
+  {
+    "userns-remap": "default",
+    "userland-proxy": false
+  },
+  {
+    "content-trust": "true",
+    "tls": true,
+    "tlscert": "/etc/docker/certs.d/tls.crt",
+    "tlskey": "/etc/docker/certs.d/tls.key",
+    "tlsverify": true
+  },
+  {
+    "insecure-registries": ["registry.example.com"],
+    "registry-mirrors": ["https://mirror.example.com"]
+  },
+  {
+    "experimental": "enabled",
+    "debug": true,
+    "labels": ["com.example.environment=production"],
+    "ipv6": false,
+    "ipv6-forwarding": false,
+    "live-restore": true,
+    "max-concurrent-downloads": 3,
+    "max-concurrent-uploads": 5,
+    "oom-score-adjust": -500,
+    "cpu-cfs-quota": true,
+    "max-file-descriptors": 65535,
+    "default-ulimit": ["nofile=1024:2048"],
+    "default-runtime": "runc",
+    "ipv4-forwarding": true
+  },
+  {
+  "selinux-enabled": true
+  },
+  {
+    "cgroup-parent": "/mycustomcgroup"
+  }
+]

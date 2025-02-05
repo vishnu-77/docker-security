@@ -1,0 +1,80 @@
+{
+  "defaultAction": "SCMP_ACT_ALLOW",
+  "architectures": [
+    "SCMP_ARCH_X86_64"
+  ],
+  "syscalls": [
+    {
+      "name": "read",
+      "action": "SCMP_ACT_ALLOW"
+    },
+    {
+      "name": "write",
+      "action": "SCMP_ACT_ALLOW"
+    },
+    {
+      "name": "open",
+      "action": "SCMP_ACT_ALLOW"
+    },
+    {
+      "name": "close",
+      "action": "SCMP_ACT_ALLOW"
+    },
+    {
+      "name": "connect",
+      "action": "SCMP_ACT_ALLOW"
+    },
+    {
+      "name": "accept",
+      "action": "SCMP_ACT_ALLOW"
+    },
+    {
+      "name": "execve",
+      "action": "SCMP_ACT_ALLOW"
+    },
+    {
+      "name": "exit",
+      "action": "SCMP_ACT_ALLOW"
+    },
+    {
+      "name": "socket",
+      "action": "SCMP_ACT_ALLOW"
+    },
+    {
+      "name": "bind",
+      "action": "SCMP_ACT_ALLOW"
+    },
+    {
+      "name": "listen",
+      "action": "SCMP_ACT_ALLOW"
+    },
+    {
+      "name": "setsockopt",
+      "action": "SCMP_ACT_ALLOW"
+    },
+    {
+      "name": "getsockopt",
+      "action": "SCMP_ACT_ALLOW"
+    },
+    {
+      "name": "ioctl",
+      "action": "SCMP_ACT_ALLOW"
+    },
+    {
+      "name": "futex",
+      "action": "SCMP_ACT_ALLOW"
+    },
+    {
+      "name": "mmap",
+      "action": "SCMP_ACT_ALLOW"
+    },
+    {
+      "name": "mprotect",
+      "action": "SCMP_ACT_ALLOW"
+    },
+    {
+      "name": "munmap",
+      "action": "SCMP_ACT_ALLOW"
+    }
+  ]
+}
