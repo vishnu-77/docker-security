@@ -52,5 +52,5 @@ This project focuses on securing a **Dockerized application** consisting of a **
 ✅ **SQL Injection Protection** – Parameterized input validation.  
 ✅ **Security Awareness** – Training developers on **container security best practices**.  
 
-### Conclusion**  
+### Conclusion
 This project ensures **a secure, scalable, and optimized** deployment for containerized applications. With **best practices in DevSecOps**, it reduces risks, **protects sensitive data**, and enhances the **reliability of virtualized systems**.  
